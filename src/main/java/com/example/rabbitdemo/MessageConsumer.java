@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MessageConsumer {
 
-    @RabbitListener(queues = RabbitConfig.QUEUE_NAME)
+    @RabbitListener(queues = RabbitConfig.DEMO_QUEUE)
     public void receiveMessage(String message) {
         System.out.println("Received: " + message);
     }

@@ -9,13 +9,20 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitConfig {
-    public static final String QUEUE_NAME = "demo-queue";
     public static final String EXCHANGE_NAME = "demo-exchange";
     public static final String ROUTING_KEY = "demo.key";
 
+    public static final String DEMO_QUEUE = "demo-queue";
+    public static final String DEMO_QUEUE2 = "demo-queue2";
+
     @Bean
-    public Queue queue() {
-        return new Queue(QUEUE_NAME, false);
+    public Queue demoQueue() {
+        return new Queue(DEMO_QUEUE, false);
+    }
+
+    @Bean
+    public Queue auditQueue() {
+        return new Queue(DEMO_QUEUE2, false);
     }
 
     @Bean
@@ -24,7 +31,12 @@ public class RabbitConfig {
     }
 
     @Bean
-    public Binding binding(Queue queue, DirectExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with(ROUTING_KEY);
+    public Binding bindingDemo(Queue demoQueue, DirectExchange exchange) {
+        return BindingBuilder.bind(demoQueue).to(exchange).with(ROUTING_KEY);
+    }
+
+    @Bean
+    public Binding bindingAudit(Queue auditQueue, DirectExchange exchange) {
+        return BindingBuilder.bind(auditQueue).to(exchange).with(ROUTING_KEY);
     }
 }
