@@ -14,6 +14,7 @@ public class RabbitConfig {
 
     public static final String DEMO_QUEUE = "demo-queue";
     public static final String DEMO_QUEUE2 = "demo-queue2";
+    //
 
     @Bean
     public Queue demoQueue() {
